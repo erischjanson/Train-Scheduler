@@ -11,19 +11,65 @@
 
 </head>
 <body>
-<!--train schedule-->
-<div class="row">
-<div class="schedule">
-	<div class="card border-primary mb-3" style="max-width: 18rem;">
-	  <div class="card-header">Current Train Schedule</div>
-	  <div class="card-body text-primary">
-	    <h5 class="card-title">Primary card title</h5>
-	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	  </div>
+<div class="container">
+	<div class="jumbotron">
+		<h1 class="display-4">Train Schdddeduler</h1> 
 	</div>
-</div>	
+		
+	
+<!--train schedule-->
+
+
+<div class="card border-primary mb-3">
+  <div class="card-header bg-primary">Current Train Schedule</div>
+  <div class="card-body text-primary">	   
+    <table class="table" id="scheduleTrainSchedule">
+  <thead>
+    <tr>
+      <th scope="col" id="scheduleTrainName">Train Name</th>
+      <th scope="col" id="scheduleDestination">Destination</th>
+      <th scope="col" id="scheduleFirstTrain">First Train Time</th>
+      <th scope="col" id="scheduleFrequency">Frequency</th>
+      <th scope="col" id="scheduleNextArrival">Next Arrival</th>
+      <th scope="col" id="scheduleMinutesAway">Minutes Away</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>@fat</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>@fat</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>@fat</td>
+      <td>@fat</td>
+    </tr>
+  </tbody>
+	</table>	    
+  </div>
 </div>
+
 <!--form element for submitting train information-->
+<div class="card border-primary mb-3">
+	<div class="card-header bg-primary">Add Train</div>
+	<div class="card-body text-black">
+
+
 <div class="form">
 	<form>
 	  <div class="form-group">
@@ -34,11 +80,20 @@
 	    <label for="destination">Destination</label>
 	    <input type="text" class="form-control" id="destination" placeholder="destination">
 	  </div>
+  	  <div class="form-group">
+	    <label for="firstTrainTime">First Train Time (HH:mm-military time)</label>
+	    <input type="text" class="form-control" id="firstTrainTime" placeholder="First Train Time">
+	  </div>
+  	  <div class="form-group">
+	    <label for="frequency">Frequency (min)</label>
+	    <input type="text" class="form-control" id="frequency" placeholder="frequency">
+	  </div>
 	  <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
 	</form>	
 </div>
-
-
+</div>
+</div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="assets/javascript/scheduler.js"></script>
 	
