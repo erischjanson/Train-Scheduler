@@ -38,8 +38,13 @@ console.log(currentTime);
 
 	console.log(firstTrain);
 	console.log(firstTrain, moment().format(("HH:mm")));
-  var timeDifference = (moment(firstTrain, "HH:mm").diff(moment(currentTime, "HH:mm"), "minutes"));
+  var timeDifference = Math.abs((moment(firstTrain, "HH:mm").diff(moment(currentTime, "HH:mm"), "minutes")));
   console.log(timeDifference);
+  console.log(frequency);
+  var remainder=timeDifference%frequency;
+  console.log(remainder);
+  var minutesAway = frequency-remainder;
+  console.log(minutesAway);
 
   //the difference between the time of first train and current time will need to be used with frequency. 
   //minutes remaining divided by frequency. the remainder should be subtracted from the frequency to get the "arriving in". add this number to current time for next arrival.
