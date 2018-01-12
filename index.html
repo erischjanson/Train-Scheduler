@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+	
 	
 	
 
@@ -82,11 +82,11 @@
 	  </div>
   	  <div class="form-group">
 	    <label for="formFirstTrainTime">First Train Time (HH:mm-military time)</label>
-	    <input type="text" class="form-control" id="formFirstTrainTime" placeholder="First Train Time">
+	    <input type="time" class="form-control" id="formFirstTrainTime" placeholder="First Train Time">
 	  </div>
   	  <div class="form-group">
 	    <label for="formFrequency">Frequency (min)</label>
-	    <input type="text" class="form-control" id="formFrequency" placeholder="frequency">
+	    <input type="number" min="5" class="form-control" id="formFrequency" placeholder="frequency in minutes">
 	  </div>
 	  <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
 	</form>	
@@ -94,8 +94,10 @@
 </div>
 </div>
 </div>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script src="assets/javascript/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="assets/javascript/scheduler.js"></script>
-	
+
 </body>
 </html>
