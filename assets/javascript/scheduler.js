@@ -45,6 +45,14 @@ console.log(currentTime);
   console.log(remainder);
   var minutesAway = frequency-remainder;
   console.log(minutesAway);
+  // moment(currentTime, "HH:mm")
+
+console.log(moment(currentTime, "HH:mm").add(5, "minutes").format("HH:mm"));
+var next = moment(currentTime, "HH:mm").add(5, "minutes").format("HH:mm");
+console.log(next);
+ 
+  //var nextTrain = minutesAway+currentTime;
+  //console.log(nextTrain);
 
   //the difference between the time of first train and current time will need to be used with frequency. 
   //minutes remaining divided by frequency. the remainder should be subtracted from the frequency to get the "arriving in". add this number to current time for next arrival.
@@ -75,7 +83,7 @@ console.log(currentTime);
 
 
 	//replace text of html element
-	$("#scheduleTrainSchedule").append("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td></tr>");
+	$("#scheduleTrainSchedule").append("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + "next train" + "</td><td>" + minutesAway + "</td></tr>");
 })
 
 
@@ -89,6 +97,7 @@ $("#submitButton").on("click", function(event){
 	var destination = $("#formDestination").val();
 	var firstTrain = $("#formFirstTrainTime").val();
 	var frequency = $("#formFrequency").val();
+
 	//add date timestamp
 	//console.log(train);
 	//console.log(destination);
