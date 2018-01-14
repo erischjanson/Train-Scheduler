@@ -50,6 +50,7 @@ console.log(currentTime);
 console.log(moment(currentTime, "HH:mm").add(5, "minutes").format("HH:mm"));
 var next = moment(currentTime, "HH:mm").add(5, "minutes").format("HH:mm");
 console.log(next);
+
  
   //var nextTrain = minutesAway+currentTime;
   //console.log(nextTrain);
@@ -83,7 +84,7 @@ console.log(next);
 
 
 	//replace text of html element
-	$("#scheduleTrainSchedule").append("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + "next train" + "</td><td>" + minutesAway + "</td></tr>");
+	$("#scheduleTrainSchedule").append("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
 })
 
 
@@ -115,8 +116,12 @@ $("#submitButton").on("click", function(event){
 
 
 	});
-		console.log(train);
-		console.log(destination);
+		var train = $("#formTrainName").val("");
+	var destination = $("#formDestination").val("");
+	var firstTrain = $("#formFirstTrainTime").val("");
+	var frequency = $("#formFrequency").val("");
+
+
 
 
 })

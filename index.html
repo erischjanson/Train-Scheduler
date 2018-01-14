@@ -4,7 +4,9 @@
 	<title>Train Scheduler</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:500" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 	
 	
 	
@@ -13,7 +15,7 @@
 <body>
 <div class="container">
 	<div class="jumbotron">
-		<h1 class="display-4">Train Schdddeduler</h1> 
+		<h1 class="display-1">Train Scheduler</h1> 
 	</div>
 		
 	
@@ -35,30 +37,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@fat</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@fat</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>@fat</td>
-      <td>@fat</td>
-    </tr>
+    
   </tbody>
 	</table>	    
   </div>
@@ -74,19 +53,19 @@
 	<form>
 	  <div class="form-group">
 	    <label for="formTrainName">Train Name</label>
-	    <input type="text" class="form-control" id="formTrainName" placeholder="enter train name">
+	    <input type="text" class="form-control" id="formTrainName" placeholder="Enter train name">
 	  </div>
 	  <div class="form-group">
 	    <label for="formDestination">Destination</label>
-	    <input type="text" class="form-control" id="formDestination" placeholder="destination">
+	    <input type="text" class="form-control" id="formDestination" placeholder="Enter destination city">
 	  </div>
   	  <div class="form-group">
-	    <label for="formFirstTrainTime">First Train Time (HH:mm-military time)</label>
-	    <input type="time" class="form-control" id="formFirstTrainTime" placeholder="First Train Time">
+	    <label for="formFirstTrainTime">First Train Time (HH:mm AM/PM)</label>
+	    <input type="time" class="form-control" id="formFirstTrainTime" placeholder="Enter first train time">
 	  </div>
   	  <div class="form-group">
 	    <label for="formFrequency">Frequency (min)</label>
-	    <input type="number" min="5" class="form-control" id="formFrequency" placeholder="frequency in minutes">
+	    <input type="number" min="5" class="form-control" id="formFrequency" placeholder="Enter frequency in minutes">
 	  </div>
 	  <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
 	</form>	
