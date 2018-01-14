@@ -48,7 +48,7 @@ console.log(currentTime);
   // moment(currentTime, "HH:mm")
 
 console.log(moment(currentTime, "HH:mm").add(5, "minutes").format("HH:mm"));
-var next = moment(currentTime, "HH:mm").add(5, "minutes").format("HH:mm");
+var next = moment(currentTime, "HH:mm").add(minutesAway, "minutes").format("HH:mm");
 console.log(next);
 
  
