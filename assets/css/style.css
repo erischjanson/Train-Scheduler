@@ -6,3 +6,12 @@
 
 }
 
+#header{
+	text-align: center;
+	font-size: 36px;
+}
+
+th, #header{
+	font-weight: bold;
+}
+

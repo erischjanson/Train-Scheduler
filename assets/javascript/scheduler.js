@@ -35,6 +35,7 @@ database.ref().on("child_added", function(childSnapshot){
 
 var currentTime = moment().format("HH:mm");
 console.log(currentTime);
+$("#time").html("Current Time: " + moment().format("HH:mm"));
 
 	console.log(firstTrain);
 	console.log(firstTrain, moment().format(("HH:mm")));
@@ -51,40 +52,10 @@ console.log(moment(currentTime, "HH:mm").add(5, "minutes").format("HH:mm"));
 var next = moment(currentTime, "HH:mm").add(minutesAway, "minutes").format("HH:mm");
 console.log(next);
 
- 
-  //var nextTrain = minutesAway+currentTime;
-  //console.log(nextTrain);
-
-  //the difference between the time of first train and current time will need to be used with frequency. 
-  //minutes remaining divided by frequency. the remainder should be subtracted from the frequency to get the "arriving in". add this number to current time for next arrival.
-  //e.g. if first train is 1300 and current time is 1713 and frequency is 50, minutes of diff=253;
-  //50 into 253 five times with remainder of 3. 50-3=47. train arrives in 47 mins. 47+1713=1800, which is next train.
-
-//var firstTrainConverted = moment().format(firstTrain, "hh:mm");
-
-//console.log(firstTrainConverted);
-//var currentTime = moment().format("hh:mm");
-//console.log(currentTime);
-//var diffTime = moment(firstTrainConverted).diff(currentTime, "minutes");
-//var diffTime=moment(firstTrain).diff(moment(), "minutes");
-//console.log(diffTime);
-
-
-//console.log(moment(firstTrainConverted).diff(moment(currentTime), "minutes"));
-
-
-
-
-//console.log(moment(currentTime).format("HH:mm"));
-//var timeDifference = currentTime.diff(firstTrain, "minutes");
-//console.log(timeDifference);
-//var otherTime = moment("11:00", "HH:mm");
-//console.log(moment(currentTime).format("HH:mm"));
-//console.log(currentTime.diff(otherTime, "minutes"));
 
 
 	//replace text of html element
-	$("#scheduleTrainSchedule").append("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
+	$("#scheduleTrainSchedule").prepend("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
 })
 
 
@@ -116,14 +87,16 @@ $("#submitButton").on("click", function(event){
 
 
 	});
-		var train = $("#formTrainName").val("");
-	var destination = $("#formDestination").val("");
-	var firstTrain = $("#formFirstTrainTime").val("");
-	var frequency = $("#formFrequency").val("");
+$("#formTrainName").val("");
+$("#formDestination").val("");
+$("#formFirstTrainTime").val("");
+$("#formFrequency").val("");
 
 
 
 
 })
 
+
+//should order by arrival time. and then remove each one whose arrival time has passed
 //see recent-user-with-all-users-solved exercise to order by date added to display by most recently added
