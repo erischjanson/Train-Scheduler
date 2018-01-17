@@ -1,100 +1,66 @@
+/*firebase settings and intialization */
+var config = {
+apiKey: "AIzaSyBFa95cQyPmC3muTiVEzQVfb_Qme6zupb4",
+authDomain: "train-a0de9.firebaseapp.com",
+databaseURL: "https://train-a0de9.firebaseio.com",
+projectId: "train-a0de9",
+storageBucket: "",
+messagingSenderId: "688298807206"
+};
 
-  var config = {
-    apiKey: "AIzaSyBFa95cQyPmC3muTiVEzQVfb_Qme6zupb4",
-    authDomain: "train-a0de9.firebaseapp.com",
-    databaseURL: "https://train-a0de9.firebaseio.com",
-    projectId: "train-a0de9",
-    storageBucket: "",
-    messagingSenderId: "688298807206"
-  };
+firebase.initializeApp(config);
 
-  firebase.initializeApp(config);
-
+//setting the firebase db to variable for ease of reference
 var database=firebase.database();
-
-//database.ref().once("value", function(data) {
-
-
-
-
-//});
-
+/*when a new "child" is added to the database, the following will execute*/
 database.ref().on("child_added", function(childSnapshot){
-	console.log(childSnapshot.val());
+	//console.log(childSnapshot.val());
 	var train = childSnapshot.val().trainName;
-	console.log(train);
+	//console.log(train);
 	var destination = childSnapshot.val().destinationCity;
 	var firstTrain = childSnapshot.val().firstTrainTime;
 	var frequency = childSnapshot.val().frequencyOfTrain;
+	
+	//calculating the current time using momentjs
+	var currentTime = moment().format("HH:mm");
+	//console.log(currentTime);
+	//rendering the current time on the page
+	$("#time").html("Current Time: " + moment().format("HH:mm"));
 
-	//var timeDiff=moment().diff(moment().unix(firstTrain), "minutes");
-	//console.log(moment().unix());
-	//console.log(timeDiff);
-	console.log(firstTrain);
-	console.log(moment.unix)
-
-var currentTime = moment().format("HH:mm");
-console.log(currentTime);
-$("#time").html("Current Time: " + moment().format("HH:mm"));
-
-	console.log(firstTrain);
-	console.log(firstTrain, moment().format(("HH:mm")));
-  var timeDifference = Math.abs((moment(firstTrain, "HH:mm").diff(moment(currentTime, "HH:mm"), "minutes")));
-  console.log(timeDifference);
-  console.log(frequency);
-  var remainder=timeDifference%frequency;
-  console.log(remainder);
-  var minutesAway = frequency-remainder;
-  console.log(minutesAway);
-  // moment(currentTime, "HH:mm")
-
-console.log(moment(currentTime, "HH:mm").add(5, "minutes").format("HH:mm"));
-var next = moment(currentTime, "HH:mm").add(minutesAway, "minutes").format("HH:mm");
-console.log(next);
+	/*calculating minutes till next train and next train time */
+  	var timeDifference = Math.abs((moment(firstTrain, "HH:mm").diff(moment(currentTime, "HH:mm"), "minutes")));
+  	var remainder=timeDifference%frequency;  
+  	var minutesAway = frequency-remainder;
+	var next = moment(currentTime, "HH:mm").add(minutesAway, "minutes").format("HH:mm");
 
 
-
-	//replace text of html element
+	//displaying all the variables in the html table and prepending the results
 	$("#scheduleTrainSchedule").prepend("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
 })
 
-
-$("#submitButton").on("click", function(event){
-	
+/*on-click event for the submit button */
+$("#submitButton").on("click", function(event){	
 	event.preventDefault();
-	//will need to creat an array to hold all trains, etc
-	//use a table in html for the schedule
 
+	/*setting variables equal to the value of what is entered in the input fields */
 	var train = $("#formTrainName").val();
 	var destination = $("#formDestination").val();
 	var firstTrain = $("#formFirstTrainTime").val();
 	var frequency = $("#formFrequency").val();
 
-	//add date timestamp
-	//console.log(train);
-	//console.log(destination);
-	//database.ref().set({
-		//trainName: train,
-		//destinationCity: destination
-
-	//});
-	//should i be defining the below object ABOVE the push function?
+	/*pushing the variable values to the firebase database and naming them as they will appear in the db */
 	database.ref().push({
 		trainName:train,
 		destinationCity:destination,
 		firstTrainTime:firstTrain,
 		frequencyOfTrain:frequency
-
-
 	});
+
+/* empties out the input fields after "submit" is clicked*/	
 $("#formTrainName").val("");
 $("#formDestination").val("");
 $("#formFirstTrainTime").val("");
 $("#formFrequency").val("");
-
-
-
-
 })
 
 
