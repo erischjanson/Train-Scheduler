@@ -1,11 +1,11 @@
 # Train-Scheduler
 Firebase and Moment.js
 
-Description:
+## Description:
 
 This application uses Firebase to store train timetable data. It allows a user to enter train times and frequencies and uses Moment.js to determine the next arrival time of the train and how many minutes away it is.
 
-Instructions:
+## Instructions:
 ```
 git clone git@github.com:erischjanson/Train-Scheduler.git
 cd Train-Scheduler
