@@ -36,7 +36,17 @@ database.ref().on("child_added", function(childSnapshot){
 
 	//displaying all the variables in the html table and prepending the results
 	$("#scheduleTrainSchedule").prepend("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
-})
+});
+
+database.ref().orderByChild("firstTrainTime").on("child_added", function(snapshot) {
+	console.log(snapshot.val().firstTrainTime);
+
+	// Change the HTML to reflect
+	$("#formTrainName").text(snapshot.val().trainName);
+	$("#formDestination").text(snapshot.val().destinationCity);
+	$("#formFirstTrainTime").text(snapshot.val().firstTrainTime);
+	$("#formFrequency").text(snapshot.val().frequencyOfTrain);
+  });
 
 /*on-click event for the submit button */
 $("#submitButton").on("click", function(event){	
@@ -46,6 +56,7 @@ $("#submitButton").on("click", function(event){
 	var train = $("#formTrainName").val();
 	var destination = $("#formDestination").val();
 	var firstTrain = $("#formFirstTrainTime").val();
+	console.log(firstTrain);
 	var frequency = $("#formFrequency").val();
 
 	/*pushing the variable values to the firebase database and naming them as they will appear in the db */
@@ -64,5 +75,8 @@ $("#formFrequency").val("");
 })
 
 
+
+
 //should order by arrival time. and then remove each one whose arrival time has passed
 //see recent-user-with-all-users-solved exercise to order by date added to display by most recently added
+
