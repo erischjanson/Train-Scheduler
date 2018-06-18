@@ -13,7 +13,12 @@ firebase.initializeApp(config);
 //setting the firebase db to variable for ease of reference
 var database=firebase.database();
 /*when a new "child" is added to the database, the following will execute*/
-database.ref().on("child_added", function(childSnapshot){
+// database.ref().on("child_added", function(childSnapshot){
+	//order db children/nodes by firsttrain time and then display them in ui. currently is only sorting after child is added to db, no on-click	
+database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
+		console.log(childSnapshot.val().firstTrainTime);
+
+
 	//console.log(childSnapshot.val());
 	var train = childSnapshot.val().trainName;
 	//console.log(train);
@@ -38,15 +43,16 @@ database.ref().on("child_added", function(childSnapshot){
 	$("#scheduleTrainSchedule").prepend("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
 });
 
-database.ref().orderByChild("firstTrainTime").on("child_added", function(snapshot) {
-	console.log(snapshot.val().firstTrainTime);
+// database.ref().orderByChild("firstTrainTime").on("child_added", function(snapshot) {
+// 	console.log(snapshot.val().firstTrainTime);
+	
 
-	// Change the HTML to reflect
-	$("#formTrainName").text(snapshot.val().trainName);
-	$("#formDestination").text(snapshot.val().destinationCity);
-	$("#formFirstTrainTime").text(snapshot.val().firstTrainTime);
-	$("#formFrequency").text(snapshot.val().frequencyOfTrain);
-  });
+// 	// Change the HTML to reflect
+// 	// $("#formTrainName").text(snapshot.val().trainName);
+// 	// $("#formDestination").text(snapshot.val().destinationCity);
+// 	// $("#formFirstTrainTime").text(snapshot.val().firstTrainTime);
+// 	// $("#formFrequency").text(snapshot.val().frequencyOfTrain);
+//   });
 
 /*on-click event for the submit button */
 $("#submitButton").on("click", function(event){	
