@@ -12,19 +12,52 @@ firebase.initializeApp(config);
 
 //setting the firebase db to variable for ease of reference
 var database=firebase.database();
-/*when a new "child" is added to the database, the following will execute*/
-// database.ref().on("child_added", function(childSnapshot){
-	//order db children/nodes by firsttrain time and then display them in ui. currently is only sorting after child is added to db, no on-click	
-database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
-		console.log(childSnapshot.val().firstTrainTime);
 
+var train = "";
+var destination = "";
+var firstTrain = "";
+// console.log(firstTrain);
+var frequency = "";
+
+/*on-click event for the submit button */
+$("#submitButton").on("click", function(event){	
+	event.preventDefault();
+
+	/*setting variables equal to the value of what is entered in the input fields */
+	train = $("#formTrainName").val();
+	destination = $("#formDestination").val();
+	firstTrain = $("#formFirstTrainTime").val();
+	console.log(firstTrain);
+	frequency = $("#formFrequency").val();
+
+	/*pushing the variable values to the firebase database and naming them as they will appear in the db */
+	database.ref().push({
+		trainName:train,
+		destinationCity:destination,
+		firstTrainTime:firstTrain,
+		frequencyOfTrain:frequency
+	});
+
+	/* empties out the input fields after "submit" is clicked*/	
+	$("#formTrainName").val("");
+	$("#formDestination").val("");
+	$("#formFirstTrainTime").val("");
+	$("#formFrequency").val("");
+});
+
+
+/*when a new "child" is added to the database, the following will execute*/
+database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
+	//order db children/nodes by firsttrain time and then display them in ui. currently is only sorting after child is added to db, no on-click	
+// database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
+		console.log(childSnapshot.val());
 
 	//console.log(childSnapshot.val());
-	var train = childSnapshot.val().trainName;
-	//console.log(train);
-	var destination = childSnapshot.val().destinationCity;
-	var firstTrain = childSnapshot.val().firstTrainTime;
-	var frequency = childSnapshot.val().frequencyOfTrain;
+	train = childSnapshot.val().trainName;
+	console.log(train);
+	destination = childSnapshot.val().destinationCity;
+	firstTrain = childSnapshot.val().firstTrainTime;
+	frequency = childSnapshot.val().frequencyOfTrain;
 	
 	//calculating the current time using momentjs
 	var currentTime = moment().format("HH:mm");
@@ -38,47 +71,16 @@ database.ref().orderByChild("firstTrainTime").on("child_added", function(childSn
   	var minutesAway = frequency-remainder;
 	var next = moment(currentTime, "HH:mm").add(minutesAway, "minutes").format("HH:mm");
 
-
 	//displaying all the variables in the html table and prepending the results
 	$("#scheduleTrainSchedule").prepend("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
 });
 
-// database.ref().orderByChild("firstTrainTime").on("child_added", function(snapshot) {
-// 	console.log(snapshot.val().firstTrainTime);
-	
+// database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
 
-// 	// Change the HTML to reflect
-// 	// $("#formTrainName").text(snapshot.val().trainName);
-// 	// $("#formDestination").text(snapshot.val().destinationCity);
-// 	// $("#formFirstTrainTime").text(snapshot.val().firstTrainTime);
-// 	// $("#formFrequency").text(snapshot.val().frequencyOfTrain);
-//   });
 
-/*on-click event for the submit button */
-$("#submitButton").on("click", function(event){	
-	event.preventDefault();
 
-	/*setting variables equal to the value of what is entered in the input fields */
-	var train = $("#formTrainName").val();
-	var destination = $("#formDestination").val();
-	var firstTrain = $("#formFirstTrainTime").val();
-	console.log(firstTrain);
-	var frequency = $("#formFrequency").val();
 
-	/*pushing the variable values to the firebase database and naming them as they will appear in the db */
-	database.ref().push({
-		trainName:train,
-		destinationCity:destination,
-		firstTrainTime:firstTrain,
-		frequencyOfTrain:frequency
-	});
 
-/* empties out the input fields after "submit" is clicked*/	
-$("#formTrainName").val("");
-$("#formDestination").val("");
-$("#formFirstTrainTime").val("");
-$("#formFrequency").val("");
-})
 
 
 
