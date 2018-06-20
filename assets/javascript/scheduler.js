@@ -45,19 +45,22 @@ $("#submitButton").on("click", function(event){
 	$("#formFrequency").val("");
 });
 
+function display(childSnapshot){
+	console.log(childSnapshot.val());
+	var row = $("<tr>");
+	row.append("<td>" + childSnapshot.val().trainName + "</td>");
+	row.append("<td>" + childSnapshot.val().destinationCity + "</td>");
+	row.append("<td>" + childSnapshot.val().firstTrainTime + "</td>");
+	row.append("<td>" + childSnapshot.val().frequencyOfTrain + "</td>");
 
-/*when a new "child" is added to the database, the following will execute*/
-database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
-	//order db children/nodes by firsttrain time and then display them in ui. currently is only sorting after child is added to db, no on-click	
-// database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
-		console.log(childSnapshot.val());
-
-	//console.log(childSnapshot.val());
 	train = childSnapshot.val().trainName;
 	console.log(train);
 	destination = childSnapshot.val().destinationCity;
+	console.log(destination);
 	firstTrain = childSnapshot.val().firstTrainTime;
+	console.log(firstTrain);
 	frequency = childSnapshot.val().frequencyOfTrain;
+	console.log(frequency)
 	
 	//calculating the current time using momentjs
 	var currentTime = moment().format("HH:mm");
@@ -71,9 +74,42 @@ database.ref().orderByChild("firstTrainTime").on("child_added", function(childSn
   	var minutesAway = frequency-remainder;
 	var next = moment(currentTime, "HH:mm").add(minutesAway, "minutes").format("HH:mm");
 
-	//displaying all the variables in the html table and prepending the results
-	$("#scheduleTrainSchedule").prepend("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
-});
+	row.append("<td>" + next + "</td>");
+	row.append("<td>" + minutesAway + "</td>");
+
+	$("#scheduleTrainSchedule").append(row);	
+
+}
+
+database.ref().orderByChild("firstTrainTime").on("child_added", display);
+// /*when a new "child" is added to the database, the following will execute*/
+// database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
+// 	//order db children/nodes by firsttrain time and then display them in ui. currently is only sorting after child is added to db, no on-click	
+// // database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
+// 		console.log(childSnapshot.val());
+
+// 	//console.log(childSnapshot.val());
+// 	train = childSnapshot.val().trainName;
+// 	console.log(train);
+// 	destination = childSnapshot.val().destinationCity;
+// 	firstTrain = childSnapshot.val().firstTrainTime;
+// 	frequency = childSnapshot.val().frequencyOfTrain;
+	
+// 	//calculating the current time using momentjs
+// 	var currentTime = moment().format("HH:mm");
+// 	//console.log(currentTime);
+// 	//rendering the current time on the page
+// 	$("#time").html("Current Time: " + moment().format("HH:mm"));
+
+// 	/*calculating minutes till next train and next train time */
+//   	var timeDifference = Math.abs((moment(firstTrain, "HH:mm").diff(moment(currentTime, "HH:mm"), "minutes")));
+//   	var remainder=timeDifference%frequency;  
+//   	var minutesAway = frequency-remainder;
+// 	var next = moment(currentTime, "HH:mm").add(minutesAway, "minutes").format("HH:mm");
+
+// 	//displaying all the variables in the html table and prepending the results
+// 	$("#scheduleTrainSchedule").prepend("<tr><td>" + train + "</td><td>" + destination + "</td><td>" + firstTrain + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + minutesAway + "</td></tr>");
+// });
 
 // database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
 
