@@ -37,6 +37,8 @@ $("#submitButton").on("click", function(event){
 		firstTrainTime:firstTrain,
 		frequencyOfTrain:frequency
 	});
+	
+	database.ref().orderByChild("firstTrainTime").on("child_added", display);
 
 	/* empties out the input fields after "submit" is clicked*/	
 	$("#formTrainName").val("");
