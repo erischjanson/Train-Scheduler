@@ -80,7 +80,7 @@ function display(childSnapshot){
 	$("#scheduleTrainSchedule").append(row);	
 
 }
-
+//put this in submit button or call display function from within submit button
 database.ref().orderByChild("firstTrainTime").on("child_added", display);
 // /*when a new "child" is added to the database, the following will execute*/
 // database.ref().orderByChild("firstTrainTime").on("child_added", function(childSnapshot){
