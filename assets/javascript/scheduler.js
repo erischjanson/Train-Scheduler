@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	console.log("ready");
 	/*firebase settings and intialization */
 var config = {
 	apiKey: "AIzaSyBFa95cQyPmC3muTiVEzQVfb_Qme6zupb4",
@@ -23,12 +24,13 @@ var config = {
 	/*on-click event for the submit button */
 	$("#submitButton").on("click", function(event){	
 		event.preventDefault();
+		console.log("submit");
 	
 		/*setting variables equal to the value of what is entered in the input fields */
 		train = $("#formTrainName").val();
 		destination = $("#formDestination").val();
 		firstTrain = $("#formFirstTrainTime").val();
-		console.log(firstTrain);
+		// console.log(firstTrain);
 		frequency = $("#formFrequency").val();
 	
 		/*pushing the variable values to the firebase database and naming them as they will appear in the db */
@@ -37,8 +39,10 @@ var config = {
 			destinationCity:destination,
 			firstTrainTime:firstTrain,
 			frequencyOfTrain:frequency
+		}, function(){
+			console.log("post push");
 		});
-		
+		console.log("now");
 		database.ref().orderByChild("firstTrainTime").on("child_added", display);
 	
 		/* empties out the input fields after "submit" is clicked*/	
@@ -49,7 +53,8 @@ var config = {
 	});
 	
 	function display(childSnapshot){
-		console.log(childSnapshot.val());
+		// console.log(childSnapshot.val());
+		console.log("display");
 		var row = $("<tr>");
 		row.append("<td>" + childSnapshot.val().trainName + "</td>");
 		row.append("<td>" + childSnapshot.val().destinationCity + "</td>");
@@ -57,13 +62,13 @@ var config = {
 		row.append("<td>" + childSnapshot.val().frequencyOfTrain + "</td>");
 	
 		train = childSnapshot.val().trainName;
-		console.log(train);
+		// console.log(train);
 		destination = childSnapshot.val().destinationCity;
-		console.log(destination);
+		// console.log(destination);
 		firstTrain = childSnapshot.val().firstTrainTime;
-		console.log(firstTrain);
+		// console.log(firstTrain);
 		frequency = childSnapshot.val().frequencyOfTrain;
-		console.log(frequency)
+		// console.log(frequency)
 		
 		//calculating the current time using momentjs
 		var currentTime = moment().format("HH:mm");	
